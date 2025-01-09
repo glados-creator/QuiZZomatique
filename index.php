@@ -13,6 +13,5 @@
 // commun() -> header html + (nav bar)
 // GET Action -> index.php
 
-include("footer.php");
-commun\\footer();
+
 
