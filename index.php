@@ -1,3 +1,18 @@
 <?php 
-// phpinfo(INFO_VARIABLES);
-header('Location: '. ( (isset($_REQUEST["redirect"])? $_REQUEST["redirect"] : "./src/index.php") ));
+// get_commun -> header html WOAW -> a faire en function
+// commun + compt woaw 
+// convertir commun en autoloader
+
+
+// get action -> truc quizz -> a séparer en different fichier
+// json + autoloader
+
+
+
+// autoloader -> index.php et partout
+// commun() -> header html + (nav bar)
+// GET Action -> index.php
+
+include("footer.php");
+commun\\footer();
+

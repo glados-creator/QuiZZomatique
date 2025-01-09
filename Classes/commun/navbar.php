@@ -1,6 +1,8 @@
 <?php
 include_once("commun.php");
+// TODO : HERE en faire une function
 ?>
+
 
 <header>
     <nav>
