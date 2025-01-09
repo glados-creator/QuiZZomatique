@@ -1,0 +1,74 @@
+[
+    {"\\Form\\Type\\number" : {
+        "name": "question_1",
+        "required": true,
+        "label": "<label for='question_1'>What is the answer to question 1?</label>",
+        "answer": "1"
+    }},
+    {"\\Form\\Type\\radio" : {
+        "name": "question_2",
+        "required": true,
+        "label": "<label for='question_2'>What is the answer to question 2?</label>",
+        "answer": "2",
+        "options": [0, 1, 2, 3]
+    }},
+    {"\\Form\\Type\\checkbox" : {
+        "name": "question_3",
+        "required": true,
+        "label": "<label for='question_3'>Select the correct answer for question 3:</label>",
+        "answer": "3",
+        "checked": false
+    }},
+    {"\\Form\\Type\\text" : {
+        "name": "question_4",
+        "required": true,
+        "label": "<label for='question_4'>What is the answer to question 4?</label>",
+        "answer": "0"
+    }},
+    {"\\Form\\Type\\range" : {
+        "name": "question_5",
+        "required": true,
+        "label": "<label for='question_5'>Slide to the correct answer for question 5 (0-3):</label>",
+        "min": 0,
+        "max": 3,
+        "defaultValue" : "3",
+        "answer": "0"
+    }},
+    {"\\Form\\Type\\range" : {
+        "name": "question_5b",
+        "required": true,
+        "label": "<label for='question_5b'>Slide to the correct answer for question 5 (0-3):</label>",
+        "min": 0,
+        "max": 3
+    }},
+    {"\\Form\\Type\\color" : {
+        "name": "question_6",
+        "required": true,
+        "label": "<label for='question_6'>Pick your favorite color for question 6:</label>",
+        "answer": ""
+    }},
+    {"\\Form\\Type\\email" : {
+        "name": "question_7",
+        "required": true,
+        "label": "<label for='question_7'>Enter your email to verify your answer to question 7:</label>",
+        "answer": ""
+    }},
+    {"\\Form\\Type\\date" : {
+        "name": "question_8",
+        "required": true,
+        "label": "<label for='question_8'>Pick a date for question 8 (no correct answer):</label>",
+        "answer": ""
+    }},
+    {"\\Form\\Type\\url" : {
+        "name": "question_9",
+        "required": true,
+        "label": "<label for='question_9'>Share a link for question 9:</label>",
+        "answer": ""
+    }},
+    {"\\Form\\Type\\submit" :{
+        "name": "question_10",
+        "required": true,
+        "label": "<label for='question_10'>Click submit to complete question 10:</label>",
+        "answer": ""
+}}
+]
