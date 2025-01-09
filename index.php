@@ -1,4 +1,10 @@
 <?php 
+include_once "./Classes/commun/commun.php";
+
+
+commun(true);
+
+
 // get_commun -> header html WOAW -> a faire en function
 // commun + compt woaw 
 // convertir commun en autoloader
@@ -10,7 +16,7 @@
 
 
 // autoloader -> index.php et partout
-// commun() -> header html + (nav bar)
+
 // GET Action -> index.php
 
 
