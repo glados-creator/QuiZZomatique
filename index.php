@@ -1,4 +1,11 @@
 <?php 
+
+require 'Classes/autoloader.php';
+Autoloader::register();
+$tmp = new Commun\commun();
+$tmp::commun(true);
+
+
 // get_commun -> header html WOAW -> a faire en function
 // commun + compt woaw 
 // convertir commun en autoloader
@@ -10,9 +17,7 @@
 
 
 // autoloader -> index.php et partout
-// commun() -> header html + (nav bar)
+
 // GET Action -> index.php
 
-include("footer.php");
-commun\\footer();
-
+include "./src/index.php";

@@ -10,9 +10,4 @@ use Form\GenericFormElement;
 
 final class submit extends GenericFormElement {
     protected string $type = 'submit'; 
-
-    function is_correct(string $value): bool
-    {
-        return true;
-    }
 }

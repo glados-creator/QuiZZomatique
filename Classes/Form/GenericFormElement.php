@@ -40,17 +40,12 @@ abstract class GenericFormElement implements InputRenderInterface
         return $this->render();
     }
 
-    function getId(): string
-    {
-        return sprintf('form_%s', $this->name);
-    }
-
     function getName(): string
     {
         return $this->name;
     }
 
-    function getValue(): array|string
+    function getValue(): string
     {
         return $this->value;
     }
