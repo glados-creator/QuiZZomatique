@@ -1,10 +1,9 @@
 <?php 
 
-
-## use function Classes\commun\commun;
-include("./Classes/commun/commun.php");
-
-commun(true);
+require 'Classes/autoloader.php';
+Autoloader::register();
+$tmp = new Commun\commun();
+$tmp::commun(true);
 
 
 // get_commun -> header html WOAW -> a faire en function
@@ -21,5 +20,4 @@ commun(true);
 
 // GET Action -> index.php
 
-
-
+include "./src/index.php";
