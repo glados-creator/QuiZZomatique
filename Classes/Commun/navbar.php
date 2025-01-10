@@ -2,15 +2,12 @@
     <nav>
         <ul>
             <li><a href="/src/index.php"><img src="static/logo.png" alt="logo.png"></a></li>
-            <li class="flex_grow"><form class="flex" action="recherche.php">
-                <input class="flex_grow" type="search" name="seach" value="search">
-                <input type="submit" value="rechercher">
-            </form></li>
+            
             <ul style="flex-wrap : wrap;">
 
                 <li>
                     <?php 
-                if ( is_login()) { 
+                if ( false ) { //is_login()) { 
                     echo "<form action='../src/compte.php'>";
                     echo "<input type='submit' value='mon compte'>";
                 } else {
