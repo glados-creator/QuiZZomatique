@@ -1,4 +1,8 @@
 <?php
+declare(strict_types=1);
+
+namespace commun;
+
 class user {
     public $email;
     public $nom;

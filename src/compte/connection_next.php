@@ -1,7 +1,9 @@
 <?php 
-include_once("../commun/commun.php");
+include_once "../commun/commun.php";
 if (!isset($_REQUEST["email"])) {
-    include("../commun/error.php");
+
+    //TODO voir possible erreur
+    include_once "../commun/error.php";
     exit;
 }
 if (is_login()){

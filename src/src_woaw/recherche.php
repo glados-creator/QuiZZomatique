@@ -1,9 +1,0 @@
-<?php 
-include_once("../commun/commun.php");
-include_once("../commun/header.php");
-include_once("../commun/navbar.php");
-?>
-<h1>TEMPLATE</h1>
-<?php
-include_once("../commun/footer.php");
-?>

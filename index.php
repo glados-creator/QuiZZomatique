@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require 'Classes/autoloader.php';
 Autoloader::register();
@@ -20,4 +20,4 @@ $tmp::commun(true);
 
 // GET Action -> index.php
 
-include "./src/index.php";
+include_once "./src/index.php";

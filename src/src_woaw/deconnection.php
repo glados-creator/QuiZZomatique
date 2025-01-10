@@ -1,1 +1,0 @@
-<?php include_once("../commun/session_end.php");

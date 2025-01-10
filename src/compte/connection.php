@@ -1,7 +1,7 @@
 <?php
-include_once("../commun/commun.php");
-include_once("../commun/header.php");
-include_once("../commun/navbar.php");
+include_once "../commun/commun.php";
+include_once "../commun/header.php";
+include_once "../commun/navbar.php";
 ?>
 <div class="flex" style="justify-content: space-around;">
     <div style="border: 1px solid;
@@ -27,4 +27,5 @@ include_once("../commun/navbar.php");
 </div>
 
 <?php
-include_once("../commun/footer.php");
+
+include_once "../commun/footer.php";
