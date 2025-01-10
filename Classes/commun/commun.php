@@ -1,6 +1,8 @@
 <?php 
 declare(strict_types=1);
-namespace commun;
+
+
+namespace Classes\commun;
 
 function footer(): void
 {
@@ -19,8 +21,9 @@ function header(bool $navbar =true):void
 function commun(bool $navbar): void
 {
 header($navbar);
+
 // autoloader
-require 'Classes/autoloader.php';
+include '../autoloader.php';
 Autoloader::register();
 }
 

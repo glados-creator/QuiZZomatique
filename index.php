@@ -1,6 +1,8 @@
 <?php 
-include_once "./Classes/commun/commun.php";
 
+
+## use function Classes\commun\commun;
+include("./Classes/commun/commun.php");
 
 commun(true);
 
