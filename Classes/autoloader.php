@@ -10,6 +10,17 @@ class Autoloader {
 
    public static function autoload($fqcn){
       $path = str_replace('\\', '/', $fqcn);
-      require_once 'Classes/'.$path.'.php';
-   }
+      try {
+         require_once 'Classes/'.$path.'.php';
+      }
+      catch (Exception $e) {
+         try {
+            require_once '../../Classes/'.$path.'.php';
+         }
+         catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+         }
+      }
+}
+
 }
