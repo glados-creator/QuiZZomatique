@@ -6,7 +6,8 @@ namespace DB;
 
 class loader_json {
     public static function load() : array {
-        $DBFILE = "./test2.json";
+        $DBFILE = getenv("DBFILE");
+        if (!$DBFILE) $DBFILE = "./quizz.json";
         if (!file_exists($DBFILE)) {
             echo "<p>FILE NOT FOUND</p>";
             die("FILE NOT FOUND");
