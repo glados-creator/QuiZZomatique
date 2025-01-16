@@ -21,7 +21,7 @@
                 </form>
             </li>
             <li>
-                <form action="../src/Quizz.php">
+                <form action="src/src_quizz/index.php">
                     <input type="submit" value="Quizz">
                 </form>
             </li>

@@ -1,12 +1,14 @@
-<?php 
-include_once "../commun/commun.php";
+<?php
+include_once "../../Classes/Commun/commun.php";
+
+$tmp = new Commun\commun();
 if (!isset($_REQUEST["email"])) {
 
     //TODO voir possible erreur
     include_once "../commun/error.php";
     exit;
 }
-if (is_login()){
+if ($tmp::is_login()){
     session_destroy();
 }
 session_start();

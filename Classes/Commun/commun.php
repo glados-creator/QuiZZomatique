@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 
-namespace commun;
+namespace Commun;
 
 include_once "user.php";
 
