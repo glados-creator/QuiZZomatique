@@ -8,20 +8,21 @@
                 <li>
                     <?php 
                 if ( false ) { //is_login()) { 
-                    echo "<form action='../src/compte.php'>";
+                    echo "<form action='../src/compte/connection.php'>";
                     echo "<input type='submit' value='mon compte'>";
-                } else {
-                    echo "<form action='../src/connection.php'>";
-                    echo "<input type='submit' value='se connecter'>";
-                    echo "<input type='submit' value='crée un compte'>";
+                }
+                else {
+                    echo "<form action='../src/compte/connection.php' method='post'>";
+                    echo "<input type='submit' name='boutton' value='se connecter'>";
+                    echo "<input type='submit' name='boutton' value='crée un compte'>";
                 }
                 echo "</form>";
                 ?>
                 </form>
             </li>
             <li>
-                <form action="../src/panier.php">
-                    <input type="submit" value="mon panier">
+                <form action="src/src_quizz/index.php">
+                    <input type="submit" value="Quizz">
                 </form>
             </li>
         </ul>

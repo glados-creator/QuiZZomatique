@@ -1,6 +1,5 @@
-<?php 
-
-require 'Classes/autoloader.php';
+<?php
+include_once 'Classes/autoloader.php';
 Autoloader::register();
 $tmp = new Commun\commun();
 $tmp::commun(true);
@@ -20,4 +19,4 @@ $tmp::commun(true);
 
 // GET Action -> index.php
 
-include "./src/index.php";
+include_once "./src/index.php";

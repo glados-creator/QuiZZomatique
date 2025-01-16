@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require 'Classes/autoloader.php';
+include_once '../../Classes/autoloader.php';
 Autoloader::register();
 
 # button
@@ -56,7 +56,8 @@ function main(): void{
     ];
     
     foreach ($class_types as $factory => $inps) {
-        echo (new $factory(...$inps));
+        //TODO Corriger       
+        echo new $factory(...$inps) ;
     }
 }
 
