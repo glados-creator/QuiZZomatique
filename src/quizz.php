@@ -1,10 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
-require 'Classes/autoloader.php';
-Autoloader::register();
-
 # button
 # checkbox
 # color
