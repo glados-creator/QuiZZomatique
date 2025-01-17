@@ -5,18 +5,26 @@ $tmp = new Commun\commun();
 $tmp::commun(true);
 
 
-// get_commun -> header html WOAW -> a faire en function
-// commun + compt woaw 
-// convertir commun en autoloader
+$action = isset($_GET['action']) ? $_GET['action'] : 'default';
 
+switch ($action) {
+    case 'account':
+        include 'src/account.php';
+        break;
 
-// get action -> truc quizz -> a séparer en different fichier
-// json + autoloader
+    case 'answer':
+        include 'src/answer.php';
+        break;
 
+    case 'quizz':
+        include 'src/quizz.php';
+        break;
 
+    case 'create':
+        include 'src/create.php';
+        break;
 
-// autoloader -> index.php et partout
-
-// GET Action -> index.php
-
-include_once "./src/index.php";
+    default:
+        include 'src/index.php';
+        break;
+}
