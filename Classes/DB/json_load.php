@@ -33,7 +33,7 @@ class loader_json {
     // Save the loaded quiz data to the database
     private static function saveToDatabase(array $quiz): void {
         // Use the existing PDO instance from your pdo.php
-        $pdo = \\DB\\PDO::getInstance(); // Adjust to your actual PDO class call
+        $pdo = \DB\PDO::getInstance(); // Adjust to your actual PDO class call
 
         try {
             // Prepare and execute the INSERT statement for the quiz

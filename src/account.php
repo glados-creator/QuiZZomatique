@@ -1,7 +1,7 @@
 <?php
 if ($_SESSION['user']) {
     loged:
-    \\Commun\\commun::must_login();
+    \Commun\commun::must_login();
     ?>
 <ul>
     <li><?php echo $_SESSION["user"]->id; ?> </li>
