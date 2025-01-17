@@ -25,11 +25,9 @@ class commun {
     }
     
     
-    public static function commun(bool $navbar): void
+    public static function commun(bool $navbar = true): void
     {
         commun::header($navbar);
-        
-        // autoloader
     }
     
 

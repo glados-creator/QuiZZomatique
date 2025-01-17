@@ -1,31 +1,17 @@
 <header>
     <nav>
         <ul>
-            <li><a href="/src/index.php"><img src="static/logo.png" alt="logo.png"></a></li>
-            
+            <li><a href="index.php?action=index"><img src="static/logo.png" alt="logo.png"></a></li>
+            <li><p>QuizzOmatique</p></li>
             <ul style="flex-wrap : wrap;">
-
-                <li>
-                    <?php 
-                if ( false ) { //is_login()) { 
-                    echo "<form action='../src/compte/connection.php'>";
-                    echo "<input type='submit' value='mon compte'>";
-                }
-                else {
-                    echo "<form action='../src/compte/connection.php' method='post'>";
-                    echo "<input type='submit' name='boutton' value='se connecter'>";
-                    echo "<input type='submit' name='boutton' value='crée un compte'>";
-                }
-                echo "</form>";
+                <li><a href="index.php?action=quizz">Quizz</a></li>
+                <?php if (\\Commun\\commun::is_login() && $_SESSION['user']->getProf()) {
                 ?>
-                </form>
-            </li>
-            <li>
-                <form action="src/src_quizz/index.php">
-                    <input type="submit" value="Quizz">
-                </form>
-            </li>
-        </ul>
+                <li><a href="index.php?action=create">Créer un quizz</a></li>
+                <?php } if (\\Commun\\commun::is_login()) {
+                ?>
+                <?php } ?>
+                <li><a href="index.php?action=account">Compte</a></li>
         </ul>
     </nav>
 </header>

@@ -10,13 +10,15 @@ class User {
     private string $nom;
     private string $prenom;
     private string $password;
+    private bool $prof;
 
-    public function __construct(string $id, string $email, string $nom, string $prenom, string $password) {
+    public function __construct(string $id, string $email, string $nom, string $prenom, string $password,bool $prof) {
         $this->id = $id;
         $this->email = $email;
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->password = $password;
+        $this->prof = $prof;
     }
 
     public function getId(): string {
@@ -37,5 +39,8 @@ class User {
 
     public function getPassword(): string {
         return $this->password;
+    }
+    public function getProf(): bool {
+        return $this->prof;
     }
 }
