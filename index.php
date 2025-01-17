@@ -10,6 +10,7 @@ $action = isset($_GET['action']) ? $_GET['action'] : 'default';
 switch ($action) {
     case 'account':
         include 'src/account.php';
+        
         break;
 
     case 'quizz':

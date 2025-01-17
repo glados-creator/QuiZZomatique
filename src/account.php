@@ -13,22 +13,40 @@ if ($_SESSION['user']) {
 <?php
 } else {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     try {
+        $sqlInstance = \DB\sql::getInstance();
         $nom = $_POST['nom'] ?? null;
         $prenom = $_POST['prenom'] ?? null;
         $email = $_POST['email'] ?? null;
         $password = $_POST['password'] ?? null;
 
-        if (!$nom || !$prenom || !$email || !$password) {
+
+
+        if (!$nom || !$prenom && $email != null && $password != null ){
+            $userHandler = $sqlInstance->authenticateUser($email,$password);
+            if ($userHandler == null) {
+                throw new Exception("Veuillez selectionnez un utilisaateur qui existe.");
+            }
+            else{
+                goto loged;
+            }
+        }
+
+
+
+        else if($nom != null && $prenom != null && $email != null && $password != null ){
+            $hashedPassword = sha1($password);
+            $userHandler = new user($sqlInstance);
+            $userHandler->addUser($nom, $prenom, $email, $hashedPassword);
+            goto loged;
+        }
+
+        else if (!$nom || !$prenom || !$email || !$password) {
             throw new Exception("Veuillez remplir tous les champs.");
         }
 
-        $hashedPassword = sha1($password);
 
-        $pdoInstance = pdo::getInstance();
-        $userHandler = new user($pdoInstance);
-        $userHandler->createUser($nom, $prenom, $email, $hashedPassword);
-        goto loged;
     } catch (Exception $e) {
         // Display error and terminate
         die("Erreur : " . htmlspecialchars($e->getMessage()));
@@ -67,4 +85,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php
 }
 }
+
 ?>

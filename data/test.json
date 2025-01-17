@@ -1,4 +1,7 @@
-[
+{
+    "name" : "truc",
+    "id": 420,
+    "content": [
     {"\\Form\\Type\\number" : {
         "name": "question_1",
         "required": true,
@@ -72,3 +75,4 @@
         "answer": ""
 }}
 ]
+}

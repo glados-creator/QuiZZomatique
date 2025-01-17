@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace DB;
 
-use PDO;
-use PDOException;
+
+
 
 class sql {
     private static $instance = null;
     private $pdo;
 
     private function __construct(string $host, string $dbname, string $username, string $password) {
-        try {
-            $this->pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            die("Database connection failed: " . $e->getMessage());
-        }
+        
+        $this->pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
     }
 
     public static function getInstance(): sql {
@@ -56,6 +54,7 @@ class sql {
         if ($result) {
             return new User($result[0]['id'], $result[0]['email'], $result[0]['nom'], $result[0]['prenom'], $result[0]['password']);
         }
+        echo'l\'utilisateur n\'existe pas';
         return null;
     }
 
