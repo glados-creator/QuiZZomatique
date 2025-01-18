@@ -11,24 +11,10 @@ class sql {
     private static $instance = null;
     private $pdo;
 
-    private function __construct(string $host, string $dbname, string $username, string $password) {
-        
-        $this->pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    private function __construct(string $bd) {
+        $this->pdo = new PDO("sqlite:'.$bd.'");
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    }
-
-    public static function getInstance(): sql {
-        if (self::$instance === null) {
-            $host = getenv("DBHOST") ?: "localhost";
-            $dbname = getenv("DBNAME") ?: "your_db_name";
-            $username = getenv("DBUSER") ?: "root";
-            $password = getenv("DBPASS") ?: "";
-
-            self::$instance = new self($host, $dbname, $username, $password);
-        }
-
-        return self::$instance;
     }
 
     private function load(string $query, array $params = []): array {

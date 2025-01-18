@@ -1,22 +1,10 @@
 <?php
-// Database connection settings
-$host = getenv("DBHOST") ?: "localhost";  // Default to localhost if not set
-$dbname = getenv("DBNAME") ?: "your_db_name"; // Replace with your DB name
-$username = getenv("DBUSER") ?: "root"; // Default to root if not set
-$password = getenv("DBPASS") ?: ""; // Set your password here
-
 // Create PDO connection
 try {
-    $pdo = new PDO("mysql:host=$host;", $username, $password);
+    $pdo = new PDO("sqlite:db.quiz");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Connected to the database server successfully.\n";
     
-    // Create database if it doesn't exist
-    $pdo->exec("CREATE DATABASE IF NOT EXISTS $dbname");
-    echo "Database '$dbname' created or already exists.\n";
-    
-    // Use the created database
-    $pdo->exec("USE $dbname");
 
     // Create user table
     $userTable = "CREATE TABLE IF NOT EXISTS user (
