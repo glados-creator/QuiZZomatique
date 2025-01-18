@@ -7,8 +7,14 @@ session_start();
 
 include "Classes/DB/user.php";
 
+
 if (!isset($_SESSION["user"])){
     $_SESSION['user'] = null;
+}
+
+if (!isset($_SESSION["BD"])){
+    $_SESSION['BD'] = null;
+    require "Classes/DB/create.php";
 }
 
 

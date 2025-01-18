@@ -3,7 +3,8 @@
 try {
     $pdo = new PDO("sqlite:db.quizz");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected to the database server successfully.\n";
+    //echo "Connected to the database server successfully.\n";
+    
     
 
     // Create user table
@@ -12,8 +13,12 @@ try {
         email VARCHAR(100) NOT NULL,
         nom VARCHAR(20) NOT NULL,
         prenom VARCHAR(20) NOT NULL,
+        prof BOOLEAN NOT NULL,
+        admins BOOLEAN NOT NULL,
         password VARCHAR(64) NOT NULL
     )";
+
+
 
     // Create quiz table
     $quizzTable = "CREATE TABLE IF NOT EXISTS quizz (
@@ -37,8 +42,9 @@ try {
     $pdo->exec($quizzTable);
     $pdo->exec($answerquizzTable);
 
-    echo "Tables 'user', 'quizz', and 'answerquizz' created or already exist in the database.\n";
-    echo($pdo->exec("SELECT * FROM user"));
+    //echo "Tables 'user', 'quizz', and 'answerquizz' created or already exist in the database.\n";
+    //echo($pdo->exec("SELECT * FROM user"));
+    $_SESSION["BD"] = $pdo;
 } catch (PDOException $e) {
     die("Database connection failed: " . $e->getMessage());
 }

@@ -1,6 +1,7 @@
 <?php
 include_once 'Classes/autoloader.php';
 
+
 Autoloader::register();
 $tmp = new Commun\commun();
 $tmp::commun(true);

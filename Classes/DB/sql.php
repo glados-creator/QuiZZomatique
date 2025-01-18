@@ -18,7 +18,22 @@ class sql {
     }
 
 
+    public function getpdo():PDO{
+        return $this->pdo;
+    }
 
+    public function getAllUser(): array{
+        $query = "SELECT * FROM user";
+        $result = $this->load($query);
+        $users = [];
+        if(!empty($result)){
+            foreach ($result as $row) {
+                $users[] = new user($row['id'], $row['email'], $row['nom'], $row['prenom'], $row['prof'], $row['admins']);
+            }
+        }
+        return $users;
+
+    }
 
     private function load(string $query, array $params = []): array {
         $stmt = $this->pdo->prepare($query);
@@ -51,8 +66,10 @@ class sql {
         $query = "SELECT * FROM quizz";
         $result = $this->load($query);
         $quizzes = [];
-        foreach ($result as $row) {
-            $quizzes[] = new Quizz($row['id'], $row['name'], $row['content']);
+        if(!empty($result)){
+                foreach ($result as $row) {
+                    $quizzes[] = new Quizz($row['id'], $row['name'], $row['content']);
+                }
         }
         return $quizzes;
     }
