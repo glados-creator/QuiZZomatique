@@ -4,91 +4,88 @@ declare(strict_types=1);
 
 namespace DB;
 
-class loader_sql {
+use PDO;
+use PDOException;
+
+class sql {
+    private static $instance = null;
     private $pdo;
 
-    public function __construct($host, $dbname, $username, $password) {
+    private function __construct(string $host, string $dbname, string $username, string $password) {
         try {
             $this->pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            echo "<p>ERREUR de base de donner</p>";
             die("Database connection failed: " . $e->getMessage());
         }
     }
 
-    // Insert User
-    public function insertUser($nom, $prenom, $password) {
-        $hashedPassword = sha1($password, PASSWORD_BCRYPT);
-        $stmt = $this->pdo->prepare("INSERT INTO user (nom, prenom, password) VALUES (?, ?, ?)");
-        $stmt->execute([$nom, $prenom, $hashedPassword]);
+    public static function getInstance(): sql {
+        if (self::$instance === null) {
+            $host = getenv("DBHOST") ?: "localhost";
+            $dbname = getenv("DBNAME") ?: "your_db_name";
+            $username = getenv("DBUSER") ?: "root";
+            $password = getenv("DBPASS") ?: "";
+
+            self::$instance = new self($host, $dbname, $username, $password);
+        }
+
+        return self::$instance;
     }
 
-    // Insert Quizz
-    public function insertQuizz() {
-        $stmt = $this->pdo->prepare("INSERT INTO quizz () VALUES ()");
-        $stmt->execute();
-    }
-
-    // Insert Resultat
-    public function insertResultat($userId, $quizzId, $note) {
-        $stmt = $this->pdo->prepare("INSERT INTO resultat (user_id, quizz_id, note) VALUES (?, ?, ?)");
-        $stmt->execute([$userId, $quizzId, $note]);
-    }
-
-    // Retrieve Results
-    public function getResults() {
-        $stmt = $this->pdo->prepare(
-            "SELECT user.nom, user.prenom, quizz.id AS quizz_id, resultat.note 
-            FROM resultat 
-            JOIN user ON resultat.user_id = user.id 
-            JOIN quizz ON resultat.quizz_id = quizz.id"
-        );
-        $stmt->execute();
+    private function load(string $query, array $params = []): array {
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-}
 
-// Create Tables
-function createTables() {
-    $host = getenv("DBHOST") || "";
-    $dbname = getenv("DBNAME") || "";
-    $username = getenv("DBUSER") || "";
-    $password = getenv("DBPASS") || "";
-    try {
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e) {
-        echo "<p>ERREUR de base de donner</p>";
-        die("Database connection failed: " . $e->getMessage());
+    private function save(string $query, array $params = []): void {
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($params);
     }
-    $userTable = "CREATE TABLE IF NOT EXISTS user (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        nom VARCHAR(20) NOT NULL,
-        prenom VARCHAR(20) NOT NULL,
-        password VARCHAR(20) NOT NULL
-    )";
 
-    $quizzTable = "CREATE TABLE IF NOT EXISTS quizz (
-        id VARCHAR(20) PRIMARY KEY
-    )";
+    public function addUser(string $nom, string $prenom, string $password, string $email): void {
+        $hashedPassword = sha1($password);
+        $query = "INSERT INTO user (nom, prenom, password, email) VALUES (?, ?, ?, ?)";
+        $this->save($query, [$nom, $prenom, $hashedPassword, $email]);
+    }
 
-    $resultatTable = "CREATE TABLE IF NOT EXISTS resultat (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        user_id INT NOT NULL,
-        quizz_id VARCHAR(20) NOT NULL,
-        note INT NOT NULL,
-        FOREIGN KEY (user_id) REFERENCES user(id),
-        FOREIGN KEY (quizz_id) REFERENCES quizz(id)
-    )";
+    public function authenticateUser(string $email, string $password): ?User {
+        $query = "SELECT * FROM user WHERE email = ? AND password = ?";
+        $result = $this->load($query, [$email, sha1($password)]);
+        if ($result) {
+            return new User($result[0]['id'], $result[0]['email'], $result[0]['nom'], $result[0]['prenom'], $result[0]['password']);
+        }
+        return null;
+    }
 
-    $pdo->exec($userTable);
-    $pdo->exec($quizzTable);
-    $pdo->exec($resultatTable);
-}
+    public function getAllQuizzes(): array {
+        $query = "SELECT * FROM quizz";
+        $result = $this->load($query);
+        $quizzes = [];
+        foreach ($result as $row) {
+            $quizzes[] = new Quizz($row['id'], $row['name'], $row['content']);
+        }
+        return $quizzes;
+    }
 
-if (__FILE__ == realpath($_SERVER['SCRIPT_FILENAME'])) {
-    // Code to run only when this file is executed directly
-    echo "creating the database";
-    createTables();
+    public function addQuizz(Quizz $quizz): void {
+        $query = "INSERT INTO quizz (id, name, content) VALUES (?, ?, ?)";
+        $this->save($query, [$quizz->getId(), $quizz->getName(), $quizz->getContent()]);
+    }
+
+    public function addAnswer(AnswerQuizz $answer): void {
+        $query = "INSERT INTO answer_quizz (user_id, quizz_id, answer) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE answer = ?";
+        $this->save($query, [$answer->getUserId(), $answer->getQuizzId(), $answer->getAnswer(), $answer->getAnswer()]);
+    }
+
+    public function getAnswers(string $quizzId): ?AnswerQuizz {
+        $userId = $_SESSION["user"]->getId();
+        $query = "SELECT * FROM answer_quizz WHERE user_id = ? AND quizz_id = ?";
+        $result = $this->load($query, [$userId, $quizzId]);
+        if ($result) {
+            return new AnswerQuizz($result[0]['user_id'], $result[0]['quizz_id'], $result[0]['answer']);
+        }
+        return null;
+    }
 }

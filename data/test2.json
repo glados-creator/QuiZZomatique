@@ -1,3 +1,7 @@
+{
+    "name" : "test 2",
+    "id": 2,
+    "content" :
 [
     {"\\Form\\Type\\number" : {
         "name": "question_1",
@@ -47,3 +51,4 @@
         "label": "envoyer"
 }}
 ]
+}
