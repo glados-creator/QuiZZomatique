@@ -1,7 +1,7 @@
 <?php
 
 function main(): void{
-    $db = \DB\pdo::getInstance();
+    $db = \DB\sql::getInstance();
     if ($_REQUEST["quizzid"]){
         $glob = null;
         foreach ($db->getAllQuizzes() as $key => $value) {

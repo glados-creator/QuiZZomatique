@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace DB;
 
-
-
-
 class sql {
     private static $instance = null;
-    private PDO $pdo;
+    public PDO $pdo;
 
     private function __construct(string $bd) {
         $this->pdo = new PDO("sqlite:'.$bd.'");
@@ -17,7 +14,12 @@ class sql {
 
     }
 
-
+    public static function getInstance(): sql {
+        if (self::$instance === null) {
+            self::$instance = new self("db.quiz");
+        }
+        return self::$instance;
+    }
 
 
     private function load(string $query, array $params = []): array {
