@@ -9,7 +9,7 @@ namespace DB;
 
 class sql {
     private static $instance = null;
-    private $pdo;
+    private PDO $pdo;
 
     private function __construct(string $bd) {
         $this->pdo = new PDO("sqlite:'.$bd.'");

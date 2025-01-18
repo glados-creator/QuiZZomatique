@@ -1,27 +1,30 @@
-<?php 
+<?php
 declare(strict_types=1);
-
 
 namespace Commun;
 
-include_once "Classes/DB/user.php";
-
 session_start();
-$_SESSION['user'] = null;
+
+include "Classes/DB/user.php";
+
+if (!isset($_SESSION["user"])){
+    $_SESSION['user'] = null;
+}
+
 
 class commun {
 
     
     public static function footer(): void
     {
-        include_once "footer.php";
+        include "footer.php";
     }
     
     public static function header(bool $navbar =true):void
     {
-        include_once "header.php";
+        include "header.php";
         if($navbar) {
-            include_once "navbar.php";
+            include "navbar.php";
         }
     }
     
