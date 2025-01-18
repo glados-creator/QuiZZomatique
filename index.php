@@ -18,8 +18,8 @@ switch ($action) {
         include 'src/quizz.php';
         break;
 
-    case 'create':
-        include 'src/create.php';
+    case 'admin':
+        include 'src/admin.php';
         break;
 
     default:
