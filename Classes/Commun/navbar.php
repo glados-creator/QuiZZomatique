@@ -18,6 +18,6 @@
 
                 <li><a href="index.php?action=account">Compte</a></li>
         </ul>
-        <h2><?php var_dump($_SESSION)?></h2>
     </nav>
 </header>
+<h2><?php var_dump($_SESSION)?></h2>

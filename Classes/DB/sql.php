@@ -67,7 +67,8 @@ class sql {
         $this->save($query, [$answer->getUserId(), $answer->getQuizzId(), $answer->getAnswer(), $answer->getAnswer()]);
     }
 
-    public function getAnswers(string $userId, string $quizzId): ?array {
+    public function getAnswers(string $quizzId): ?AnswerQuizz {
+        $userId = $_SESSION["user"]->getId();
         $query = "SELECT * FROM answer_quizz WHERE user_id = ? AND quizz_id = ?";
         $result = $this->load($query, [$userId, $quizzId]);
         if ($result) {

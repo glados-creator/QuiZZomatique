@@ -5,12 +5,6 @@ namespace Commun;
 
 session_start();
 
-include "Classes/DB/user.php";
-
-if (!isset($_SESSION["user"])){
-    $_SESSION['user'] = null;
-}
-
 
 class commun {
 
@@ -42,19 +36,14 @@ class commun {
 
     public static function must_login()
     {
-        if (is_login()) {
+        if (commun::is_login()) {
             return;
         }
-        include_once "../commun/commun.php";
-        include_once "../commun/header.php";
-        include_once "../commun/navbar.php";
         echo "<h1>vous devez vous connecter</h1> <p><a href='index.php'>appuyer ici pour allez a l'acceuil</a></p>";
         echo "<p>";
         echo "<a href='connection.php'> appuyer ici pour vous connecter";
         echo "</a></p>";
-        include_once "../commun/footer.php";
         exit;
     }
-
 }
     ?>
