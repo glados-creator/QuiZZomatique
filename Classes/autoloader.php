@@ -6,7 +6,7 @@ class Autoloader {
    }
 
    public static function autoload($fqcn) {
-      pri $fqcn . "\n";
+      print $fqcn . "\n";
       if ($fqcn === 'PDO') {
          return;
       }
