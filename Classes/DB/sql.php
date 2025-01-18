@@ -35,15 +35,15 @@ class sql {
 
     public function addUser(string $nom, string $prenom, string $password, string $email): void {
         $hashedPassword = sha1($password);
-        $query = "INSERT INTO user (nom, prenom, password, email) VALUES (?, ?, ?, ?)";
-        $this->save($query, [$nom, $prenom, $hashedPassword, $email]);
+        $query = "INSERT INTO user (nom, prenom, password, email,prof) VALUES (?, ?, ?, ?)";
+        $this->save($query, [$nom, $prenom, $hashedPassword, $email,false]);
     }
 
     public function authenticateUser(string $email, string $password): ?User {
         $query = "SELECT * FROM user WHERE email = ? AND password = ?";
         $result = $this->load($query, [$email, sha1($password)]);
         if ($result) {
-            return new User($result[0]['id'], $result[0]['email'], $result[0]['nom'], $result[0]['prenom'], $result[0]['password']);
+            return new User($result[0]['id'], $result[0]['email'], $result[0]['nom'], $result[0]['prenom'], $result[0]['password'],$result[0]['prof']);
         }
         echo'l\'utilisateur n\'existe pas';
         return null;
@@ -66,7 +66,7 @@ class sql {
 
     public function addAnswer(AnswerQuizz $answer): void {
         $query = "INSERT INTO answer_quizz (user_id, quizz_id, answer) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE answer = ?";
-        $this->save($query, [$answer->getUserId(), $answer->getQuizzId(), $answer->getAnswer(), $answer->getAnswer()]);
+        $this->save($query, [$answer->getUserId(), $answer->getQuizzId(), $answer->getAnswer()]);
     }
 
     public function getAnswers(string $quizzId): ?AnswerQuizz {

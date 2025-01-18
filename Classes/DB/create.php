@@ -12,6 +12,7 @@ try {
         email VARCHAR(100) NOT NULL,
         nom VARCHAR(20) NOT NULL,
         prenom VARCHAR(20) NOT NULL,
+        prof BOOLEAN NOT NULL,
         password VARCHAR(64) NOT NULL
     )";
 
