@@ -1,0 +1,54 @@
+{
+    "name" : "test 2",
+    "id": 2,
+    "content" :
+[
+    {"\\Form\\Type\\number" : {
+        "name": "question_1",
+        "required": true,
+        "label": "What is the answer to question 1?",
+        "answer": "1"
+    }},
+    {"\\Form\\Type\\radio" : {
+        "name": "question_2",
+        "required": true,
+        "label": "What is the answer to question 2?",
+        "answer": "2",
+        "choices": [0, 1, 2, 3]
+    }},
+    {"\\Form\\Type\\checkbox" : {
+        "name": "question_3",
+        "required": false,
+        "label": "Select the correct answer for question 3:",
+        "answer": "on",
+        "checked": false
+    }},
+    {"\\Form\\Type\\checkbox" : {
+        "name": "question_3b",
+        "required": false,
+        "label": "Select the correct answer for question 3b:",
+        "answer": "off",
+        "checked": true
+    }},
+    {"\\Form\\Type\\text" : {
+        "name": "question_4",
+        "required": true,
+        "label": "What is the answer to question 4?",
+        "answer": "4"
+    }},
+    {"\\Form\\Type\\range" : {
+        "name": "question_5",
+        "required": true,
+        "label": "Slide to the correct answer for question 3):</label>",
+        "min": 0,
+        "max": 3,
+        "defaultValue" : "3",
+        "answer": "0"
+    }},
+    {"\\Form\\Type\\submit" :{
+        "name": "envoyer",
+        "required": false,
+        "label": "envoyer"
+}}
+]
+}
