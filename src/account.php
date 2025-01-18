@@ -1,5 +1,5 @@
 <?php
-if ($_SESSION['user']) {
+if ($_SESSION['user'] != null) {
     loged:
     \Commun\commun::must_login();
     ?>
@@ -15,7 +15,6 @@ if ($_SESSION['user']) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
-        $sqlInstance = \DB\sql::getInstance();
         $nom = $_POST['nom'] ?? null;
         $prenom = $_POST['prenom'] ?? null;
         $email = $_POST['email'] ?? null;
@@ -24,11 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
         if (!$nom || !$prenom && $email != null && $password != null ){
+
             $userHandler = $sqlInstance->authenticateUser($email,$password);
             if ($userHandler == null) {
                 throw new Exception("Veuillez selectionnez un utilisaateur qui existe.");
             }
             else{
+                $_SESSION["user"]=$userHandler;
                 goto loged;
             }
         }
@@ -39,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $hashedPassword = sha1($password);
             $userHandler = new user($sqlInstance);
             $userHandler->addUser($nom, $prenom, $email, $hashedPassword);
+            $_SESSION['user'] = $userHandler;
             goto loged;
         }
 

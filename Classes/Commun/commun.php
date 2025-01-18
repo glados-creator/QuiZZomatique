@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Commun;
 
-include_once "user.php";
+include_once "Classes/DB/user.php";
 
 session_start();
+$_SESSION['user'] = null;
 
 class commun {
 

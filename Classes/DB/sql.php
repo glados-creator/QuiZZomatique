@@ -17,6 +17,9 @@ class sql {
 
     }
 
+
+
+
     private function load(string $query, array $params = []): array {
         $stmt = $this->pdo->prepare($query);
         $stmt->execute($params);
