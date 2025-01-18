@@ -22,13 +22,13 @@ class sql {
     }
 
 
-    private function load(string $query, array $params = []): array {
+    public function load(string $query, array $params = []): array {
         $stmt = $this->pdo->prepare($query);
         $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    private function save(string $query, array $params = []): void {
+    public function save(string $query, array $params = []): void {
         $stmt = $this->pdo->prepare($query);
         $stmt->execute($params);
     }
